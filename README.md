@@ -118,44 +118,36 @@ curl http://localhost:3000/
 ### Registro de usuario
 
 ```bash
-curl -X POST http://localhost:3000/api/auth/register \
+curl -X POST http://localhost:3000/api/v1/auth/register \
   -H "Content-Type: application/json" \
-  -d '{
-    "username": "usuario_prueba",
-    "email": "prueba@example.com",
-    "password": "Password123!"
-  }'
+  -d '{"username":"usuario_prueba","email":"prueba@example.com","password":"Password123!","firstName":"Prueba","lastName":"Usuario"}'
 ```
 
 ### Inicio de sesión
 
 ```bash
-curl -X POST http://localhost:3000/api/auth/login \
+curl -X POST http://localhost:3000/api/v1/auth/login \
   -H "Content-Type: application/json" \
-  -d '{
-    "email": "prueba@example.com",
-    "password": "Password123!"
-  }'
+  -d '{"email":"prueba@example.com","password":"Password123!"}'
 ```
 
-Guarda el token JWT que recibes en la respuesta para las siguientes pruebas.
+Guarda el token JWT que recibes en la respuesta (dentro de `data.token`) para las siguientes pruebas.
 
 ### Crear una tarea
 
+Reemplaza `YOUR_JWT_TOKEN` con el token obtenido en el paso anterior:
+
 ```bash
-curl -X POST http://localhost:3000/api/tasks \
+curl -X POST http://localhost:3000/api/v1/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -d '{
-    "title": "Mi primera tarea",
-    "description": "Descripción de la tarea"
-  }'
+  -d '{"title":"Mi primera tarea","description":"Descripción de la tarea"}'
 ```
 
 ### Listar tareas
 
 ```bash
-curl -X GET http://localhost:3000/api/tasks \
+curl -X GET http://localhost:3000/api/v1/tasks \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
